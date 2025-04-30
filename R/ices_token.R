@@ -3,7 +3,7 @@
 #' Stores a user token in the system keyring
 #'
 #' @param username the ices username that you require a token for,
-#'   Default: NULL, which results in getOption("ices.username")
+#'   Default: NULL, which results in \code{getOption("ices.username")}
 #' @param password the ices username that you require a token for,
 #'   Default: NULL, which results in a dialogue box request for the
 #'   password
@@ -18,34 +18,17 @@
 #' ices_token()
 #' }
 #'
-#' @seealso
-#'  \code{\link[whoami]{username}}
-#'  \code{\link[keyring]{key_get}}
-#'
 #' @rdname ices_token
-#'
-#' @importFrom whoami username
-#' @importFrom keyring key_get key_set_with_value
 #'
 #' @export
 ices_token <- function(username = NULL, password = NULL, refresh = FALSE, ...) {
-
   if (is.null(username)) {
-    username <- getOption("ices.username")
+    username <- get_username()
     if (is.null(username)) {
-      # NULL means use system username
-      username <- whoami::username()
-      not.usermessaged <-
-        is.null(getOption("ices.usermessaged")) ||
-          !getOption("ices.usermessaged")
-      if (not.usermessaged) {
-        options(ices.usermessaged = TRUE)
-        ## message to user about adding username to options
-        message(
-          "using system username: ", username,
-          "\nConsider adding a default username using:\n\ticesConnect::set_username(<add username here>)"
-        )
-      }
+      warning(
+        "Username not set correctly, see ?icesConnect::set_username for more details",
+      )
+      return(NULL)
     }
   }
 

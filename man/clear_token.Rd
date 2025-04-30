@@ -4,11 +4,11 @@
 \alias{clear_token}
 \title{clear_token}
 \usage{
-clear_token(username = getOption("ices.username"))
+clear_token(username = get_username())
 }
 \arguments{
 \item{username}{the ices username that you require a token for,
-Default: getOption("ices.username")}
+Default: \code{getOption("ices.username")}}
 }
 \value{
 no return value
@@ -21,8 +21,5 @@ Deletes the token from the key ring.
 clear_token()
 }
 
-}
-\seealso{
-\code{\link[whoami]{username}}
-\code{\link[keyring]{key_get}}
+
 }

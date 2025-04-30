@@ -1,8 +1,20 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+# icesConnect 1.1.4 (2025-04-30)
+
+* allow encoding to be set in ices_post()
+
+
+# icesConnect 1.1.3 (2025-04-03)
+
+* remove dependency on askPass
+
+
+# icesConnect 1.1.1 (2025-04-03)
+
+* convert to holding token in DCF file
 
 # icesConnect 1.0.0 (2022-02-09)
 
-- Same as previous version.
+* Same as previous version.
 
 
 # icesConnect 0.0.0.9007 (2022-02-09)

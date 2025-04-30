@@ -3,7 +3,7 @@
 #' Deletes the token from the key ring.
 #'
 #' @param username the ices username that you require a token for,
-#'   Default: getOption("ices.username")
+#'   Default: \code{getOption("ices.username")}
 #'
 #' @return no return value
 #'
@@ -12,30 +12,19 @@
 #' clear_token()
 #' }
 #'
-#' @seealso
-#'  \code{\link[whoami]{username}}
-#'  \code{\link[keyring]{key_get}}
 #'
 #' @rdname clear_token
 #'
-#' @importFrom whoami username
-#' @importFrom keyring key_delete
 #'
 #' @export
-clear_token <- function(username = getOption("ices.username")) {
+clear_token <- function(username = get_username()) {
   if (is.null(username)) {
-    # NULL means use system username
-    username <- whoami::username()
+    return (NULL)
   }
 
-  usernames <-
-    grep(
-      paste0(username, "_[0-9]+"), keyring::key_list()$username,
-      value = TRUE
-    )
+  message("Deleting token for user ICES\\", username)
 
-  for (i in seq_along(usernames)) {
-    keyring::key_delete("ices_token", username = usernames[i])
-  }
+  user_files <- list.files(config_dir(), full.names = TRUE)
 
+  unlink(user_files[grep(paste0(username, ".dcf"), user_files)])
 }

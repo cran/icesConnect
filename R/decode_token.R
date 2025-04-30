@@ -14,7 +14,6 @@
 #'
 #' @seealso
 #'  \code{\link[whoami]{username}}
-#'  \code{\link[keyring]{key_get}}
 #'
 #' @rdname decode_token
 #'
@@ -40,6 +39,7 @@ decode_token <- function(jwt = ices_token(), formatted = TRUE) {
         github = gsub("GH_", "", grep("GH_", names(claims), value = TRUE)),
         username = claims$sub,
         email = claims$`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`,
+        github_username = claims$GitHubUserName,
         expiration = as.POSIXct(claims$exp, origin = "1970-01-01")
       )
   }
